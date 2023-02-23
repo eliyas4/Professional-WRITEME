@@ -1,66 +1,88 @@
 import inquirer from 'inquirer';
 import fs from "fs/promises";
 
-let {Name, Description, Installation, Usage, Email} = await inquirer
+let {name, description, installation, usage, license, email} = await inquirer
   .prompt([
     {
         type: "input",
-        name: "Name",
+        name: "name",
         message: "What is the name of your project",
     },
     {
         type: "input",
-        name: "Description",
+        name: "description",
         message: "write a description of your project:"
     },
     {
         type: 'input',
-        name: 'Installation',
+        name: 'installation',
         message: 'What are the instructions to install your project?', 
     },
     {
         type: 'input',
-        name: 'Usage',
+        name: 'usage',
         message: 'What is the usage information of your project?',
     },
-
-//    {
-//        type: 'input',
-//        message: 'What are the contribution guidelines of your project?',
-//        name: 'guidelines',
-//    },
-//    {
-//        type: 'list',
-//        message: 'Which licesnse will you be using for your application?',
-//        name: 'license',
-//        choices: ['Apache', 'Boost', 'BSD', 'CC0'],
-//        default: 'Apache'
-//    },
+    {
+        type: 'list',
+        message: 'What is the appropriate license for your application?',
+        name: 'license',
+        choices: ['Apache', 'Boost', 'BSD', 'MIT'],
+        default: 'Apache'
+    },
     {
         type: 'input',
-        name: 'Email',
+        name: 'email',
         message: 'What is your email address:',
     }
 
   ])
 
   let readmeText = `
-  # ${Name}
+  # ${name}
   
   ## Project Description 
-  ${Description}
+  ${description}
 
   ## Installation 
-  ${Installation}
+  ${installation}
 
   ## Usage 
-  ${Usage}
+  ${usage}
+
+  ## License
+  ${generateLicense(license)}
 
   ## Email 
-  ${Email}
+  ${email}
 
     `
   
+
+  function generateLicense(license) {
+
+    
+    if(license === "Apache") {
+    return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+    }
+    else if (license === "boost") {
+        return "[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)"
+
+    }
+    else if (license === "BSD") {
+        return "[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)"
+
+    }
+    else{
+        return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+
+    }
+
+
+    
+  }
+
+
 
     fs.writeFile("README.md", readmeText)
     console.log()
