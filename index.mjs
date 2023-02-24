@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import fs from "fs/promises";
-
-let {name, description, installation, usage, license, email} = await inquirer
+// These are the questions that the inquirer will ask
+let {name, description, installation, usage, contributions, tests, license, email} = await inquirer
   .prompt([
     {
         type: "input",
@@ -30,7 +30,7 @@ let {name, description, installation, usage, license, email} = await inquirer
     },
     {
         type: 'input',
-        name: 'Tests',
+        name: 'tests',
         message: 'What are the test instructions for your project',
     },
     {
@@ -45,9 +45,8 @@ let {name, description, installation, usage, license, email} = await inquirer
         name: 'email',
         message: 'What is your email address:',
     }
-
   ])
-
+// This part of the code takes the values of each inquirer question and constructs the README accordingly 
   let readmeText = `
   # ${name}
   
@@ -57,10 +56,9 @@ let {name, description, installation, usage, license, email} = await inquirer
   ## Table of Contents
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Contribution Guidelines](#guidelines)
-  - [Test Instructions](#test)
+  - [Contributions](#contributions)
+  - [Tests](#test)
   - [License](#license)
-  - [Questions](#userName)
 
   ## Installation 
   ${installation}
@@ -78,11 +76,9 @@ let {name, description, installation, usage, license, email} = await inquirer
   ${generateLicense(license)}
 
     `
-  
-
+ // This functions generates the badges for the licenses 
   function generateLicense(license) {
 
-    
     if(license === "Apache") {
     return "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
     }
@@ -97,14 +93,9 @@ let {name, description, installation, usage, license, email} = await inquirer
     else{
         return "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
 
-    }
-
-
-    
+    } 
   }
-
-
-
-    fs.writeFile("README.md", readmeText)
-    console.log()
+// This writes the constructed README into the README file 
+fs.writeFile("README.md", readmeText)
+ 
   
