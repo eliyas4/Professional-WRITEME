@@ -24,6 +24,16 @@ let {name, description, installation, usage, license, email} = await inquirer
         message: 'What is the usage information of your project?',
     },
     {
+        type: 'input',
+        name: 'contributions',
+        message: 'What are the contributing guidelines for your project?',
+    },
+    {
+        type: 'input',
+        name: 'Tests',
+        message: 'What are the test instructions for your project',
+    },
+    {
         type: 'list',
         message: 'What is the appropriate license for your application?',
         name: 'license',
@@ -42,7 +52,15 @@ let {name, description, installation, usage, license, email} = await inquirer
   # ${name}
   
   ## Project Description 
-  ${description}
+  ${description} ${email}
+
+  ## Table of Contents
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contribution Guidelines](#guidelines)
+  - [Test Instructions](#test)
+  - [License](#license)
+  - [Questions](#userName)
 
   ## Installation 
   ${installation}
@@ -50,11 +68,14 @@ let {name, description, installation, usage, license, email} = await inquirer
   ## Usage 
   ${usage}
 
+  ## Contributions 
+  ${contributions}
+
+  ## Tests 
+  ${tests}
+
   ## License
   ${generateLicense(license)}
-
-  ## Email 
-  ${email}
 
     `
   
