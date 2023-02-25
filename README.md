@@ -16,7 +16,7 @@
 
   ## Usage 
   THIS Video 
-  https://drive.google.com/file/d/1xVAmqxw_SW2XME97xZQ14PQHYVqf8MlT/view
+  https://drive.google.com/file/d/1xVAmqxw_SW2XME97xZQ14PQHYVqf8MlT/view?usp=share_link
   
 
   ## Contributions 
